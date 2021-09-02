@@ -32,6 +32,7 @@ permalink: /:categories/:title/
 paginate: 5 # amount of posts to show
 paginate_path: /page:num/
 timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+repository: rickylsr/blog-mm
 
 include:
   - _pages
@@ -102,3 +103,13 @@ category_archive:
 tag_archive:
   type: liquid
   path: /tags/
+  
+comments:
+  provider: "giscus"
+  giscus:
+    repo_id              : MDEwOlJlcG9zaXRvcnk0MDIzMjM5Mjc=
+    category_name        : General
+    category_id          : DIC_kwDOF_r5184B-6jJ
+    discussion_term      : pathname
+    reactions_enabled    : # '1' for enabled (default), '0' for disabled
+    theme                : # "light" (default), "dark", "dark_dimmed", "transparent_dark", "preferred_color_scheme"
