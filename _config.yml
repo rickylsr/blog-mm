@@ -58,9 +58,9 @@ plugins:
   - jekyll-include-cache
 
 author:
-  name   : "First Lastname"
+  name   : "Ricky Lee"
   avatar : "/assets/images/Profile-2.png"
-  bio    : "My awesome biography constrained to a sentence or two goes here."
+  bio    : "法学民工，不合格 Geek."
   links:
     - label: "Website"
       icon: "fas fa-fw fa-link"
@@ -70,7 +70,7 @@ author:
       url: "https://twitter.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
+      url: "https://github.com/rickylsr"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       url: "https://instagram.com/"
