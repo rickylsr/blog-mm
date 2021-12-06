@@ -63,9 +63,9 @@ author:
   avatar : "/assets/images/Profile-2.png"
   bio    : "法学民工，不合格 Geek."
   links:
-    - label: "Website"
+    - label: "Website CN"
       icon: "fas fa-fw fa-link"
-      url: "https://"
+      url: "https://blog.rickylee.cn"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/rickylsr"
@@ -74,7 +74,7 @@ footer:
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
+      url: "https://github.com/rickylsr"
 
 
 defaults:
