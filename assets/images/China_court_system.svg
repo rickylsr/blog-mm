@@ -1,0 +1,44 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>Layer 1</title>
+  <rect stroke="#000" id="svg_1" height="72" width="167.99999" y="102.2" x="254.6" fill="#FFE7A2"/>
+  <rect stroke="#000" id="svg_2" height="72" width="165.99998" y="411.2" x="255.6" fill="#FFE7A2"/>
+  <rect stroke="#000" id="svg_3" height="72" width="167.99999" y="310.2" x="254.6" fill="#FFE7A2"/>
+  <rect stroke="#000" id="svg_4" height="72" width="168.99999" y="206.2" x="253.6" fill="#FFE7A2"/>
+  <rect stroke="#000" id="svg_5" height="72" width="167.99999" y="102.2" x="419.6" fill="#FFE7A2"/>
+  <rect stroke="#000" id="svg_6" height="72" width="165.99998" y="411.2" x="420.6" fill="#FFE7A2"/>
+  <rect stroke="#000" id="svg_7" height="72" width="167.99999" y="310.2" x="419.6" fill="#FFE7A2"/>
+  <rect stroke="#000" id="svg_8" height="72" width="168.99999" y="206.2" x="418.6" fill="#FFE7A2"/>
+  <rect stroke="#000" id="svg_10" height="72" width="165.99998" y="411.2" x="255.6" fill="#FFE7A2"/>
+  <rect stroke="#000" id="svg_11" height="72" width="167.99999" y="310.2" x="254.6" fill="#FFE7A2"/>
+  <rect stroke="#000" id="svg_13" height="72" width="167.99999" y="102.2" x="585.6" fill="#FFE7A2"/>
+  <rect stroke="#000" id="svg_14" height="72" width="165.99998" y="411.2" x="586.6" fill="#FFE7A2"/>
+  <rect stroke="#000" id="svg_15" height="72" width="167.99999" y="310.2" x="585.6" fill="#FFE7A2"/>
+  <rect stroke="#000" id="svg_16" height="72" width="168.99999" y="206.2" x="584.6" fill="#FFE7A2"/>
+  <path stroke="#000" id="svg_17" d="m19.59998,84.2l758.00008,0l0,108l-758.00008,0l0,-108z" opacity="undefined" fill="none"/>
+  <path stroke="#000" id="svg_18" d="m19.60005,200.2l759.99998,0l0,89l-759.99998,0l0,-89z" opacity="undefined" fill="none"/>
+  <path stroke="#000" id="svg_19" d="m18.59998,299.2l761.00003,0l0,93l-761.00003,0l0,-93z" opacity="undefined" fill="none"/>
+  <path stroke="#000" id="svg_20" d="m17.59998,400.2l760.00003,0l0,108l-760.00003,0l0,-108z" opacity="undefined" fill="none"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" stroke-width="0" id="svg_21" y="126.2" x="49.6" stroke="#000" fill="#000000">Supreme Court</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" stroke-width="0" id="svg_22" y="234.2" x="65.6" stroke="#000" fill="#000000">High Court</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" stroke-width="0" id="svg_23" y="337.2" x="29.6" stroke="#000" fill="#000000">Intermediate Court</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" stroke-width="0" id="svg_24" y="443.2" x="53.6" stroke="#000" fill="#000000">District Court</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" stroke-width="0" id="svg_25" y="168.2" x="59.6" stroke="#000" fill="#000000">最高人民法院</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" stroke-width="0" id="svg_27" y="270.2" x="59.6" stroke="#000" fill="#000000">高级人民法院</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" stroke-width="0" id="svg_28" y="374.2" x="57.6" stroke="#000" fill="#000000">中级人民法院</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" stroke-width="0" id="svg_29" y="482.2" x="35.6" stroke="#000" fill="#000000">区/县/... 人民法院</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" stroke-width="0" id="svg_30" y="148.2" x="303.6" stroke="#000" fill="#000000">Civil Court</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" stroke-width="0" id="svg_31" y="249.2" x="289.6" stroke="#000" fill="#000000">Civil Court</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" stroke-width="0" id="svg_32" y="348.2" x="290.6" stroke="#000" fill="#000000">Civil Court</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" stroke-width="0" id="svg_33" y="454.2" x="287.6" stroke="#000" fill="#000000">Civil Court</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" stroke-width="0" id="svg_35" y="147.2" x="445.6" stroke="#000" fill="#000000">Criminal Court</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" stroke-width="0" id="svg_36" y="247.2" x="442.6" stroke="#000" fill="#000000">Criminal Court</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" stroke-width="0" id="svg_37" y="350.2" x="447.6" stroke="#000" fill="#000000">Criminal Court</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" stroke-width="0" id="svg_38" y="456.2" x="443.6" stroke="#000" fill="#000000">Criminal Court</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" stroke-width="0" id="svg_39" y="146.2" x="591.6" stroke="#000" fill="#000000">Administrative Court</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" stroke-width="0" id="svg_40" y="247.2" x="590.6" stroke="#000" fill="#000000">Administrative Court</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" stroke-width="0" id="svg_41" y="354.2" x="590.6" stroke="#000" fill="#000000">Administrative Court</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" stroke-width="0" id="svg_42" y="455.2" x="591.6" stroke="#000" fill="#000000">Administrative Court</text>
+ </g>
+</svg>
