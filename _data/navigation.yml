@@ -1,4 +1,6 @@
 main:
+  - title: "返回主站"
+    url: https://rlee.cc/
   - title: "标签"
     url: /tags/
   - title: "关于"
