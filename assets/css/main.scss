@@ -1,15 +1,17 @@
 ---
 search: false
 ---
-body {
-  scroll-behavior:smooth;
-}
-
-page__title {
+.body {
+  scroll-behavior:smooth
+};
+.page__title {
   margin-top:0;
   line-height:1.5;
 }
 
+.greedy-nav {
+  font-size: 15px;
+}
 @charset "utf-8";
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
