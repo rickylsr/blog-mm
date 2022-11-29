@@ -2,18 +2,19 @@
 search: false
 ---
 .body {
-  scroll-behavior:smooth
-};
+  scroll-behavior:smooth;
+}
+
 .page__title {
   margin-top:0;
   line-height:1.5;
 }
 
-h2.masthead__menu-item {
+.masthead__menu-item {
   font-size: 15px;
 }
 
-h2.archive__item {
+.archive__item {
   font-size:18px;
 }
 
