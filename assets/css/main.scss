@@ -9,9 +9,14 @@ search: false
   line-height:1.5;
 }
 
-.greedy-nav {
+.masthead__menu-item {
   font-size: 15px;
 }
+
+.h2 {
+  font-size:18px;
+}
+
 @charset "utf-8";
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
