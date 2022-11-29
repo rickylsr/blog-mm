@@ -1,13 +1,14 @@
 ---
-# Only the main Sass file needs front matter (the dashes are enough)
 search: false
 ---
-html, body
+body {
   scroll-behavior:smooth;
+}
 
-page__title
-  margin-top: 0;
-  line-height: 1.5;
+page__title {
+  margin-top:0;
+  line-height:1.5;
+}
 
 @charset "utf-8";
 
