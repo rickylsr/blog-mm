@@ -4,6 +4,15 @@ search: false
 .body {
   scroll-behavior:smooth;
 }
+.layout--home {
+  background-color: white;
+  background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+}
+  background-color
+.masterhead {
+  background-color: white;
+}
+
 .list__item {
   border-radius: 5px;
   padding-left: 20px;
@@ -20,6 +29,12 @@ search: false
   color: rgb(56, 56, 56);
   text-decoration: auto;
 }
+
+.archive__item a:visited {
+  color: rgb(56, 56, 56);
+  text-decoration: auto;
+}
+
 .list__item:hover {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
