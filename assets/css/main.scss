@@ -18,6 +18,10 @@ search: false
   background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
 }
 
+.layout--tags {
+  background-color: white;
+  background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+}
 .list__item {
   border-radius: 10px;
   padding-left: 20px;
@@ -27,6 +31,7 @@ search: false
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
   background-color: white;
 }
+
 .archive__item a {
   position: relative;
   z-index: 10;
