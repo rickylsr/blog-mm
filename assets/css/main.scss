@@ -5,13 +5,13 @@ search: false
   scroll-behavior:smooth;
 }
 
+.masthead__inner-wrap {
+  background-color: white;
+}
+
 .layout--home {
   background-color: white;
   background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
-}
-
-.masthead__inner-wrap {
-  background-color: white;
 }
 
 .list__item {
