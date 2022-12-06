@@ -8,6 +8,8 @@ search: false
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
 
+//Overall adjustment for text display
+
 .page__title h1 {
   margin-top: 0;
   line-height: 1.5;
@@ -55,6 +57,8 @@ ul {
   background-color: white;
 }
 
+//Homepage background colour
+
 .layout--home {
   background-color: white;
   background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
@@ -64,6 +68,9 @@ ul {
   background-color: white;
   background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
 }
+
+//Archive item card style
+
 .list__item {
   border-radius: 10px;
   padding-left: 20px;
@@ -131,6 +138,8 @@ h1#page-title {
   font-size: 30px;
 }
 
+//For style at "YOU MAY ALSO ENJOY" part
+
 .page__related .grid__item {
   border: 1px solid #b6b6b6;
   height: 160px;
@@ -143,12 +152,12 @@ h1#page-title {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
-.grid__item .archive__item-excerpt {
+.page__related grid__item .archive__item-excerpt {
   font-size: 14px;
   display: none;
 }
 
-.archive__item span.page__meta-readtime {
+.page__related .archive__item span.page__meta-readtime {
   position: absolute;
   bottom: 40px;
 }
