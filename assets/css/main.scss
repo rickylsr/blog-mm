@@ -165,3 +165,12 @@ h1#page-title {
 .archive__item {
   height: inherit;
 }
+
+.sidebar.sticky {
+  /* box-shadow: 8px 10px 20px rgb(0 0 0 / 21%); */
+  /* padding-right: 40px; */
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 2em;
+  background: white;
+}
