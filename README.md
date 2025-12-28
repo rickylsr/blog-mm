@@ -1,4 +1,4 @@
-# Blog Remaked with newest Minimal Mistake Theme
+# [Blog](https://rlee.cc) Remaked with newest Minimal Mistake Theme
 
 Keep it minimal.
 
