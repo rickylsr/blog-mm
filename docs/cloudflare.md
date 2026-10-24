@@ -59,6 +59,20 @@ Cloudflare 自动安装依赖。连接时仅授权此博客仓库，按控制台
 也不需要在 GitHub 中保存 Cloudflare 部署 token。
 请不要把任何凭据放进文章、`admin/config.yml` 或 `VITE_` 变量。
 
+### 验证 Git 自动发布
+
+连接现有仓库后，推送一次新的 `master` 提交并查看 Cloudflare 的构建历史。
+仓库连接、分支和命令配置本身不代表构建已经成功。
+线上 `/build.json` 会返回实际构建的提交 SHA，以及发布来源：
+
+```sh
+curl https://ricky-blog.rklee.workers.dev/build.json
+```
+
+当 `publisher` 为 `cloudflare-builds` 且 `commit` 与目标提交一致，才能确认
+Git 推送 → Cloudflare 构建 → 部署的整条链路已经打通。
+本地执行 `npm run deploy` 的产物会标为 `local`，不能代替自动发布验收。
+
 ## 编辑器登录
 
 认证服务默认地址配置在 `admin/config.yml`，界面支持 GitHub OAuth 及访问令牌登录。
