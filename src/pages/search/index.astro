@@ -50,6 +50,10 @@ import Button from '../../components/Button.astro';
   async function search() {
     const current = ++generation;
     const query = input.value.trim().toLocaleLowerCase();
+    const url = new URL(location.href);
+    if (input.value.trim()) url.searchParams.set('q', input.value.trim());
+    else url.searchParams.delete('q');
+    history.replaceState(null, '', url);
     results.replaceChildren();
     if (!query) {
       status.textContent = '输入关键词，搜索这个博客。';
@@ -86,7 +90,12 @@ import Button from '../../components/Button.astro';
         link.textContent = post.title;
         const date = document.createElement('time');
         date.dateTime = post.date;
-        date.textContent = post.date;
+        date.textContent = new Intl.DateTimeFormat('zh-CN', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          timeZone: 'UTC',
+        }).format(new Date(`${post.date}T00:00:00Z`));
         item.append(date, link);
         results.append(item);
       }

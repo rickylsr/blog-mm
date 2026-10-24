@@ -8,6 +8,10 @@ const {
   noindex = false,
   article = false,
 } = Astro.props;
+const journal =
+  Astro.url.pathname === '/' ||
+  /^\/page\d+\/$/.test(Astro.url.pathname) ||
+  Astro.url.pathname === '/tags/';
 const canonical = new URL(Astro.url.pathname, site.url);
 const nav = [
   ['/', '首页'],
@@ -23,7 +27,7 @@ const nav = [
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f8f9f6" />
+    <meta name="theme-color" content="#ffffff" />
     {noindex && <meta name="robots" content="noindex, follow" />}
     <title>{title === site.title ? title : `${title} · Ricky Lee`}</title>
     <link rel="canonical" href={canonical} />
@@ -45,16 +49,13 @@ const nav = [
     />
     <slot name="head" />
   </head>
-  <body>
+  <body class:list={{ journal }}>
     <a class="skip-link" href="#main">
       跳到正文
     </a>
     <header class="site-header">
       <a class="brand" href="/" aria-label="Ricky Lee 的博客首页">
-        <span class="brand-mark">r.</span>
-        <span>
-          Ricky Lee<span class="brand-note">生活与折腾的记录</span>
-        </span>
+        <span translate="no">Ricky Lee&#39;s Blog</span>
       </a>
       <nav aria-label="主导航">
         {nav.map(([href, label]) => (
@@ -65,7 +66,12 @@ const nav = [
             {label}
           </a>
         ))}
-        <a class="search-link" href="/search/" aria-label="搜索文章">
+        <a
+          class="search-link"
+          href="/search/"
+          aria-label="搜索文章"
+          aria-current={Astro.url.pathname === '/search/' ? 'page' : undefined}
+        >
           <svg
             viewBox="0 0 24 24"
             width="19"
@@ -87,20 +93,19 @@ const nav = [
         <img
           class="avatar"
           src="/assets/images/Profile-2.png"
-          width="86"
-          height="86"
+          width="112"
+          height="112"
           alt="Ricky Lee 的头像"
         />
         <div>
           <p class="author-name">Ricky Lee</p>
           <p class="author-bio">
             法学民工，不合格 Geek.
-            <br />
-            快乐生活，快乐科技。
+            <span class="author-bio-extra">
+              <br />
+              快乐生活，快乐科技。
+            </span>
           </p>
-        </div>
-        <div class="author-location">
-          <span class="status-dot"></span> Singapore · 随时出发
         </div>
         <div class="author-links">
           <a href="https://github.com/rickylsr" rel="me">
@@ -108,15 +113,9 @@ const nav = [
           </a>
           <a href="/feed.xml">RSS ↗</a>
         </div>
-        <div class="sidebar-note">
-          <span class="eyebrow">A PERSONAL NOTEBOOK</span>
-          <p>
-            把路上的见闻、厨房里的尝试，
-            <br />
-            和折腾过的小事，慢慢记下来。
-          </p>
-          <span>{posts.length} 篇记录 · 始于 2019</span>
-        </div>
+        <p class="author-count">
+          {posts.length} 篇文章 · <a href="/posts/">浏览归档 →</a>
+        </p>
       </aside>
       <main id="main" tabindex="-1">
         <slot />
@@ -125,7 +124,7 @@ const nav = [
     <footer class="site-footer">
       <span>© {new Date().getFullYear()} Ricky Lee</span>
       <span>
-        保持好奇，慢慢记录。<span class="footer-dot"> · </span>
+        快乐生活，快乐科技。<span class="footer-dot"> · </span>
         <a href="/feed.xml">订阅更新 ↗</a>
       </span>
     </footer>

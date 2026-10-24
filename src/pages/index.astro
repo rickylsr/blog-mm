@@ -6,30 +6,14 @@ const pageSize = 5;
 ---
 
 <Base>
-  <section class="intro">
-    <div class="intro-top">
-      <span class="eyebrow">LIFE, TRAVEL & LITTLE THINGS</span>
-      <span class="intro-number">01 / JOURNAL</span>
-    </div>
-    <h1>
-      生活很琐碎，
-      <br />
-      也总有值得记录的事<span class="accent">。</span>
-    </h1>
-    <p>
-      旅行、做饭、技术折腾，和偶尔冒出来的想法。
-      <br class="desktop-break" />
-      这里是我的个人博客，也是一本慢慢写下去的笔记。
-    </p>
-    <div class="topic-links">
-      <a href="/tags/#游记">途中见闻 ↗</a>
-      <a href="/tags/#美食">厨房日常 ↗</a>
-      <a href="/posts/">所有记录 ↗</a>
-    </div>
-  </section>
+  <header class="page-heading home-heading">
+    <p class="eyebrow">生活 · 旅行 · 技术</p>
+    <h1>最近的记录</h1>
+    <p>记录琐碎杂事和一些折腾经验。快乐生活，快乐科技。</p>
+  </header>
   <div class="section-heading">
-    <h2>最近更新</h2>
-    <span>{posts.length} 篇文章</span>
+    <h2>最新文章</h2>
+    <a href="/posts/">全部 {posts.length} 篇 →</a>
   </div>
   <PostList posts={posts.slice(0, pageSize)} />
   {posts.length > pageSize && (

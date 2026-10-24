@@ -166,6 +166,13 @@ export function loadPosts(directory = resolve('_posts'), now = new Date()) {
 }
 
 export const posts = loadPosts();
-export const formatDate = (date) => date.replaceAll('-', '.');
+const dateFormatter = new Intl.DateTimeFormat('zh-CN', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  timeZone: 'UTC',
+});
+export const formatDate = (date) =>
+  dateFormatter.format(new Date(`${date}T00:00:00Z`)).replaceAll('/', '.');
 export const tagLink = (tag) => `/tags/#${encodeURIComponent(slugify(tag))}`;
 export const tagId = slugify;

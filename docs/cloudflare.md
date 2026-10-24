@@ -38,20 +38,25 @@ npm run deploy
 
 先在返回的 `workers.dev` 地址检查文章、图片、搜索、分页、404 和评论。
 站点正式 URL 仍为 `https://rlee.cc`，未切换域名前的 canonical/RSS 链接仍指向该域名。
-确认后在该 Worker 的 Settings → Domains & Routes 中添加 `rlee.cc` 为 Custom Domain。
-本配置不会自动修改域名或 DNS，也不需要 GitHub Pages 使用的 `CNAME` 文件来绑定域名。
+`wrangler.jsonc` 已将 `rlee.cc/*` 路由到此 Worker，同时保留 `workers.dev` 地址供检查。
+`rlee.cc` 的 DNS 记录必须继续开启 Cloudflare 代理；请求由 Worker 静态资源直接响应，
+不再经过旧源站，因此不依赖旧源站的证书。后续 Git 自动发布会保留同一路由配置。
+
+当前 Wrangler 登录没有 DNS 记录修改权限，旧 DNS 记录也会阻止添加 Custom Domain，
+所以使用现有代理记录配合 Worker 路由。若以后改为 Custom Domain，应先备份并清理
+冲突的主机名记录，再将配置改为 `pattern: "rlee.cc", custom_domain: true`。
 
 ## GitHub 自动发布
 
 使用 Cloudflare Workers Builds 连接 `rickylsr/blog-mm`，生产分支设为 `master`：
 
-| 配置 | 值 |
-| --- | --- |
-| Worker | `ricky-blog` |
-| 根目录 | `/` |
-| 构建命令 | `npm run build` |
-| 部署命令 | `npx wrangler deploy` |
-| Node 版本 | `.nvmrc` 中的 `24` |
+| 配置             | 值                                           |
+| ---------------- | -------------------------------------------- |
+| Worker           | `ricky-blog`                                 |
+| 根目录           | `/`                                          |
+| 构建命令         | `npm run build`                              |
+| 部署命令         | `npx wrangler deploy`                        |
+| Node 版本        | `.nvmrc` 中的 `24`                           |
 | 构建变量（可选） | `VITE_CMS_AUTH_URL` 为自己部署的认证服务 URL |
 
 Cloudflare 自动安装依赖。连接时仅授权此博客仓库，按控制台指引配置构建用的部署权限。

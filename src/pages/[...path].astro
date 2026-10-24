@@ -10,6 +10,7 @@ import {
   tagLink,
 } from '../lib/content.mjs';
 import { readFileSync } from 'node:fs';
+import { imageDimensions, reserveImageSpace } from '../lib/images.mjs';
 
 export function getStaticPaths() {
   const articlePaths = posts.map((post) => ({
@@ -43,6 +44,9 @@ export function getStaticPaths() {
 
 const { post, document, page } = Astro.props;
 const pageCount = Math.ceil(posts.length / 5);
+const articleHTML =
+  post || document ? await reserveImageSpace((post || document).html) : '';
+const coverDimensions = await imageDimensions(post?.data.header?.image);
 ---
 
 {page ? (
@@ -92,6 +96,8 @@ const pageCount = Math.ceil(posts.length / 5);
       {post.data.header?.image && (
         <img
           class="article-cover"
+          {...coverDimensions}
+          fetchpriority="high"
           src={post.data.header.image}
           alt=""
           loading="eager"
@@ -110,7 +116,7 @@ const pageCount = Math.ceil(posts.length / 5);
           </ol>
         </details>
       )}
-      <div class="prose" set:html={post.html} />
+      <div class="prose" set:html={articleHTML} />
       <footer class="article-footer">
         <p>感谢读到这里。</p>
         <a href="/posts/">继续翻翻其他记录 →</a>
@@ -165,6 +171,6 @@ const pageCount = Math.ceil(posts.length / 5);
       <span class="eyebrow">A LITTLE ABOUT THIS SPACE</span>
       <h1>{document.data.title}</h1>
     </header>
-    <div class="prose" set:html={document.html} />
+    <div class="prose" set:html={articleHTML} />
   </Base>
 )}
