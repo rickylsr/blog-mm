@@ -1,6 +1,7 @@
 ---
 import Icon from '../../components/Icon.astro';
 import Base from '../../layouts/Base.astro';
+import CardSelect from '../../components/CardSelect.astro';
 import { posts, formatDate } from '../../lib/content.mjs';
 const pageSize = 10;
 const years = [...new Set(posts.map((post) => post.date.slice(0, 4)))];
@@ -17,34 +18,29 @@ const years = [...new Set(posts.map((post) => post.date.slice(0, 4)))];
     data-page-size={pageSize}
   >
     <div class="archive-filters">
-      <div>
-        <label for="archive-year">年份</label>
-        <select
-          id="archive-year"
-          name="year"
-          autocomplete="off"
-          data-year-filter
-          disabled
-        >
-          <option value="">全部年份</option>
-          {years.map((year) => (
-            <option value={year}>{year} 年</option>
-          ))}
-        </select>
-      </div>
-      <div>
-        <label for="archive-order">排序</label>
-        <select
-          id="archive-order"
-          name="order"
-          autocomplete="off"
-          data-order-filter
-          disabled
-        >
-          <option value="desc">从新到旧</option>
-          <option value="asc">从旧到新</option>
-        </select>
-      </div>
+      <CardSelect
+        id="archive-year"
+        label="年份"
+        name="year"
+        attribute="data-year-filter"
+        value=""
+        grid
+        options={[
+          { value: '', label: '全部年份' },
+          ...years.map((year) => ({ value: year, label: `${year} 年` })),
+        ]}
+      />
+      <CardSelect
+        id="archive-order"
+        label="排序"
+        name="order"
+        attribute="data-order-filter"
+        value="desc"
+        options={[
+          { value: 'desc', label: '从新到旧' },
+          { value: 'asc', label: '从旧到新' },
+        ]}
+      />
     </div>
     <p class="muted archive-status" role="status" data-archive-status>
       共 {posts.length} 篇文章。

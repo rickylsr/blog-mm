@@ -1,8 +1,8 @@
 const browser = document.querySelector<HTMLElement>('[data-archive-browser]')!;
 const pageSize = Number(browser.dataset.pageSize);
 const yearFilter =
-  browser.querySelector<HTMLSelectElement>('[data-year-filter]')!;
-const orderFilter = browser.querySelector<HTMLSelectElement>(
+  browser.querySelector<HTMLInputElement>('[data-year-filter]')!;
+const orderFilter = browser.querySelector<HTMLInputElement>(
   '[data-order-filter]',
 )!;
 const groups = [
@@ -73,6 +73,8 @@ function render() {
   }
   yearFilter.value = year;
   orderFilter.value = order;
+  yearFilter.dispatchEvent(new Event('selection-sync'));
+  orderFilter.dispatchEvent(new Event('selection-sync'));
   status.textContent = `${year ? `${year} 年 · ` : ''}共 ${matching.length} 篇文章，${order === 'asc' ? '从旧到新' : '从新到旧'}，每页 ${pageSize} 篇。`;
   pageStatus.textContent = `第 ${page} / ${pageCount} 页`;
   pagination.hidden = pageCount <= 1;

@@ -1,0 +1,80 @@
+---
+import Icon from './Icon.astro';
+interface Props {
+  id: string;
+  label: string;
+  name: string;
+  attribute: string;
+  value: string;
+  options: { value: string; label: string }[];
+  grid?: boolean;
+}
+const {
+  id,
+  label,
+  name,
+  attribute,
+  value,
+  options,
+  grid = false,
+} = Astro.props;
+---
+
+<div class="archive-filter">
+  <span class="archive-filter-label" id={`${id}-label`}>
+    {label}
+  </span>
+  <div
+    class:list={['card-select', { 'card-select--grid': grid }]}
+    data-card-select
+  >
+    <input
+      type="hidden"
+      id={id}
+      name={name}
+      value={value}
+      data-select-value
+      {...{ [attribute]: '' }}
+    />
+    <button
+      type="button"
+      class="card-select-trigger"
+      aria-haspopup="listbox"
+      aria-expanded="false"
+      aria-controls={`${id}-options`}
+      aria-labelledby={`${id}-label ${id}-value`}
+      data-select-trigger
+      disabled
+    >
+      <span id={`${id}-value`} data-select-label>
+        {options.find((option) => option.value === value)?.label}
+      </span>
+      <Icon name="chevron-down" />
+    </button>
+    <div
+      class="card-select-options"
+      id={`${id}-options`}
+      role="listbox"
+      aria-labelledby={`${id}-label`}
+      data-select-options
+      hidden
+    >
+      {options.map((option) => (
+        <button
+          type="button"
+          role="option"
+          class="card-select-option"
+          data-value={option.value}
+          aria-selected={String(option.value === value)}
+          tabindex={option.value === value ? 0 : -1}
+        >
+          <span>{option.label}</span>
+          <span class="option-check">
+            <Icon name="check" />
+          </span>
+        </button>
+      ))}
+    </div>
+  </div>
+</div>
+<script src="../scripts/card-select.ts"></script>
