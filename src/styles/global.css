@@ -425,7 +425,7 @@ main {
   gap: 10px;
   margin-bottom: 40px;
 }
-.tag-cloud > a {
+.tag-cloud > button {
   display: inline-flex;
   align-items: center;
   padding: 10px 14px;
@@ -434,7 +434,7 @@ main {
   border-radius: 6px;
   font-size: 14px;
 }
-.tag-cloud > a:hover {
+.tag-cloud > button:hover {
   border-color: var(--accent);
 }
 .tag-cloud span {
@@ -1227,5 +1227,108 @@ html.search-open {
 @media (max-width: 720px) {
   .search-shortcut {
     display: none;
+  }
+}
+
+.tag-cloud > button[aria-pressed='true'] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+  font-weight: 600;
+}
+.tag-cloud > button[aria-pressed='true'] span {
+  color: inherit;
+}
+.tag-cloud > button:disabled {
+  cursor: default;
+}
+.topic-browser .post-card[hidden] {
+  display: none;
+}
+.topic-status {
+  margin-bottom: 20px;
+}
+.topic-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+.topic-pagination:has(> [hidden]) {
+  display: none;
+}
+.topic-browser noscript a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.archive-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  margin-bottom: 20px;
+}
+.archive-filters > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.archive-filters label {
+  font-size: 14px;
+  color: var(--muted);
+}
+.archive-filters select {
+  min-height: 44px;
+  max-width: 100%;
+  padding: 8px 30px 8px 12px;
+  border: 1px solid #a4afb8;
+  border-radius: 6px;
+  background-color: white;
+  color: var(--ink);
+  font: inherit;
+  font-size: 16px;
+}
+.archive-filters select:hover {
+  border-color: var(--accent);
+}
+.archive-status {
+  margin-bottom: 24px;
+}
+.archive-year[hidden],
+.archive-year li[hidden],
+.archive-pagination[hidden] {
+  display: none;
+}
+.archive-pagination {
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+}
+.archive-pagination a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+}
+.archive-pagination a[aria-disabled='true'] {
+  color: var(--muted);
+  background: var(--soft);
+  border-color: var(--line);
+  cursor: default;
+}
+@media (max-width: 420px) {
+  .archive-filters {
+    gap: 14px;
+  }
+  .archive-filters > div {
+    flex: 1;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+  .archive-pagination {
+    gap: 8px;
+  }
+  .archive-pagination a {
+    padding: 10px;
   }
 }

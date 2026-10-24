@@ -1,12 +1,16 @@
 ---
 import Icon from './Icon.astro';
 import { formatDate, tagLink } from '../lib/content.mjs';
-const { posts } = Astro.props;
+const { posts, initialCount = posts.length, filterable = false } = Astro.props;
 ---
 
 <div class="post-list">
-  {posts.map((post) => (
-    <article class="post-card">
+  {posts.map((post, index) => (
+    <article
+      class="post-card"
+      hidden={index >= initialCount}
+      data-tags={filterable ? JSON.stringify(post.tags) : undefined}
+    >
       <div class="post-meta">
         <time datetime={post.date}>{formatDate(post.date)}</time>
         <span class="meta-dot">·</span>
@@ -19,7 +23,9 @@ const { posts } = Astro.props;
       <div class="post-bottom">
         <div class="post-tags">
           {post.tags.map((tag) => (
-            <a href={tagLink(tag)}># {tag}</a>
+            <a href={tagLink(tag)} data-post-tag={filterable ? tag : undefined}>
+              # {tag}
+            </a>
           ))}
         </div>
         <a

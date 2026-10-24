@@ -2,6 +2,7 @@
 import Icon from '../../components/Icon.astro';
 import Base from '../../layouts/Base.astro';
 import { posts, formatDate } from '../../lib/content.mjs';
+const pageSize = 10;
 const years = [...new Set(posts.map((post) => post.date.slice(0, 4)))];
 ---
 
@@ -10,25 +11,85 @@ const years = [...new Set(posts.map((post) => post.date.slice(0, 4)))];
     <h1>文章归档</h1>
     <p>一路写下来，共 {posts.length} 篇文章。</p>
   </header>
-  {years.map((year) => (
-    <section class="archive-year">
-      <h2>
-        {year}
-        <span>
-          {posts.filter((post) => post.date.startsWith(year)).length} 篇
-        </span>
-      </h2>
-      <ul>
-        {posts
-          .filter((post) => post.date.startsWith(year))
-          .map((post) => (
-            <li>
-              <time datetime={post.date}>{formatDate(post.date).slice(5)}</time>
-              <a href={post.path}>{post.title}</a>
-              <Icon name="arrow-up-right" />
-            </li>
+  <section
+    class="archive-browser"
+    data-archive-browser
+    data-page-size={pageSize}
+  >
+    <div class="archive-filters">
+      <div>
+        <label for="archive-year">年份</label>
+        <select
+          id="archive-year"
+          name="year"
+          autocomplete="off"
+          data-year-filter
+          disabled
+        >
+          <option value="">全部年份</option>
+          {years.map((year) => (
+            <option value={year}>{year} 年</option>
           ))}
-      </ul>
-    </section>
-  ))}
+        </select>
+      </div>
+      <div>
+        <label for="archive-order">排序</label>
+        <select
+          id="archive-order"
+          name="order"
+          autocomplete="off"
+          data-order-filter
+          disabled
+        >
+          <option value="desc">从新到旧</option>
+          <option value="asc">从旧到新</option>
+        </select>
+      </div>
+    </div>
+    <p class="muted archive-status" role="status" data-archive-status>
+      共 {posts.length} 篇文章。
+    </p>
+    <noscript>
+      <p class="muted">筛选和分页需要 JavaScript，以下显示全部文章。</p>
+    </noscript>
+    <div data-archive-results>
+      {years.map((year) => {
+        const entries = posts.filter((post) => post.date.startsWith(year));
+        return (
+          <section class="archive-year" data-archive-year={year}>
+            <h2>
+              {year}
+              <span data-year-count>{entries.length} 篇</span>
+            </h2>
+            <ul>
+              {entries.map((post) => (
+                <li data-archive-entry data-date={post.date}>
+                  <time datetime={post.date}>
+                    {formatDate(post.date).slice(5)}
+                  </time>
+                  <a href={post.path}>{post.title}</a>
+                  <Icon name="arrow-up-right" />
+                </li>
+              ))}
+            </ul>
+          </section>
+        );
+      })}
+    </div>
+    <nav
+      class="pagination archive-pagination"
+      aria-label="文章归档分页"
+      data-archive-pagination
+      hidden
+    >
+      <a data-previous-page>
+        <Icon name="arrow-left" /> 上一页
+      </a>
+      <span data-page-status aria-live="polite" aria-atomic="true"></span>
+      <a data-next-page>
+        下一页 <Icon name="arrow-right" />
+      </a>
+    </nav>
+  </section>
 </Base>
+<script src="../../scripts/archive.ts"></script>

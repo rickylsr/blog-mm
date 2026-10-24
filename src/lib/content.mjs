@@ -174,5 +174,5 @@ const dateFormatter = new Intl.DateTimeFormat('zh-CN', {
 });
 export const formatDate = (date) =>
   dateFormatter.format(new Date(`${date}T00:00:00Z`)).replaceAll('/', '.');
-export const tagLink = (tag) => `/tags/#${encodeURIComponent(slugify(tag))}`;
+export const tagLink = (tag) => `/tags/?tag=${encodeURIComponent(tag)}`;
 export const tagId = slugify;
