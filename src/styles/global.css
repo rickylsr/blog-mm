@@ -220,18 +220,12 @@ main {
   border-bottom: 1px solid var(--line);
   margin-bottom: 32px;
 }
-.eyebrow {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 1.4px;
-  color: var(--muted);
-}
 .page-heading h1 {
   font-size: clamp(28px, 3vw, 36px);
   font-weight: 750;
   letter-spacing: -0.8px;
   line-height: 1.45;
-  margin: 12px 0;
+  margin: 0 0 12px;
 }
 .page-heading p {
   color: var(--muted);
@@ -257,7 +251,7 @@ main {
   font-size: 13px;
   color: var(--muted);
 }
-.section-heading h2 {
+.section-heading h1 {
   margin: 0;
   font-weight: 600;
 }
@@ -904,12 +898,6 @@ main {
   .home-heading {
     padding-bottom: 8px;
     margin-bottom: 8px;
-  }
-  .home-heading .eyebrow {
-    display: none;
-  }
-  .home-heading h1 {
-    margin-top: 0;
   }
   .post-list {
     gap: 16px;

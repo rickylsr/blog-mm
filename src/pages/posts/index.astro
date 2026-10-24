@@ -5,11 +5,10 @@ import { posts, formatDate } from '../../lib/content.mjs';
 const years = [...new Set(posts.map((post) => post.date.slice(0, 4)))];
 ---
 
-<Base title="全部文章">
+<Base title="文章归档">
   <header class="page-heading">
-    <span class="eyebrow">THE ARCHIVE</span>
-    <h1>一路写下来</h1>
-    <p>{posts.length} 篇记录，关于生活，也关于我。</p>
+    <h1>文章归档</h1>
+    <p>一路写下来，共 {posts.length} 篇文章。</p>
   </header>
   {years.map((year) => (
     <section class="archive-year">

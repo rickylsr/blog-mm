@@ -53,7 +53,6 @@ const coverDimensions = await imageDimensions(post?.data.header?.image);
 {page ? (
   <Base title={`文章 · 第 ${page} 页`} noindex>
     <header class="page-heading">
-      <span class="eyebrow">THE JOURNAL</span>
       <h1>更早的记录</h1>
       <p>一些经历，一些想法，留在这里慢慢翻。</p>
     </header>
@@ -175,7 +174,6 @@ const coverDimensions = await imageDimensions(post?.data.header?.image);
     noindex={document.data.sitemap === false}
   >
     <header class="page-heading">
-      <span class="eyebrow">A LITTLE ABOUT THIS SPACE</span>
       <h1>{document.data.title}</h1>
     </header>
     <div class="prose" set:html={articleHTML} />
