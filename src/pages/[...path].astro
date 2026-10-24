@@ -1,0 +1,170 @@
+---
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import Button from '../components/Button.astro';
+import {
+  posts,
+  readDocument,
+  renderDocument,
+  formatDate,
+  tagLink,
+} from '../lib/content.mjs';
+import { readFileSync } from 'node:fs';
+
+export function getStaticPaths() {
+  const articlePaths = posts.map((post) => ({
+    params: { path: post.path.replace(/^\/|\/$/g, '') },
+    props: { post },
+  }));
+  const pages = ['about'].map((name) => {
+    const document = readDocument(readFileSync(`_pages/${name}.md`, 'utf8'));
+    const rendered = renderDocument(
+      document.body.replace(
+        '本站基于[Github Pages](https://pages.github.com)构建，在此表示感谢。',
+        '本站使用 Astro 生成静态页面，并通过 Cloudflare 托管。',
+      ),
+      document.data,
+    );
+    return {
+      params: { path: document.data.permalink.replace(/^\/|\/$/g, '') },
+      props: { document: { ...document, ...rendered } },
+    };
+  });
+  const pageSize = 5;
+  const pagination = Array.from(
+    { length: Math.max(0, Math.ceil(posts.length / pageSize) - 1) },
+    (_, index) => ({
+      params: { path: `page${index + 2}` },
+      props: { page: index + 2 },
+    }),
+  );
+  return [...articlePaths, ...pages, ...pagination];
+}
+
+const { post, document, page } = Astro.props;
+const pageCount = Math.ceil(posts.length / 5);
+---
+
+{page ? (
+  <Base title={`文章 · 第 ${page} 页`} noindex>
+    <header class="page-heading">
+      <span class="eyebrow">THE JOURNAL</span>
+      <h1>更早的记录</h1>
+      <p>一些经历，一些想法，留在这里慢慢翻。</p>
+    </header>
+    <PostList posts={posts.slice((page - 1) * 5, page * 5)} />
+    <nav class="pagination" aria-label="文章分页">
+      <a href={page === 2 ? '/' : `/page${page - 1}/`}>← 较新的文章</a>
+      <span>
+        {page} / {pageCount}
+      </span>
+      {page < pageCount ? (
+        <a href={`/page${page + 1}/`}>更早的文章 →</a>
+      ) : (
+        <span />
+      )}
+    </nav>
+  </Base>
+) : post ? (
+  <Base
+    title={post.title}
+    description={post.excerpt}
+    image={post.data.header?.image}
+    article
+  >
+    <article class="article">
+      <header class="article-heading">
+        <a class="back-link" href="/posts/">
+          ← 所有文章
+        </a>
+        <div class="post-meta">
+          <time datetime={post.date}>{formatDate(post.date)}</time>
+          <span class="meta-dot">·</span>
+          <span>{post.minutes} 分钟阅读</span>
+        </div>
+        <h1>{post.title}</h1>
+        <div class="post-tags">
+          {post.tags.map((tag) => (
+            <a href={tagLink(tag)}># {tag}</a>
+          ))}
+        </div>
+      </header>
+      {post.data.header?.image && (
+        <img
+          class="article-cover"
+          src={post.data.header.image}
+          alt=""
+          loading="eager"
+          decoding="async"
+        />
+      )}
+      {post.data.toc && post.headings.length > 0 && (
+        <details class="table-of-contents">
+          <summary>这篇文章的目录</summary>
+          <ol>
+            {post.headings.map((heading) => (
+              <li class:list={{ nested: heading.depth === 3 }}>
+                <a href={`#${heading.slug}`}>{heading.text}</a>
+              </li>
+            ))}
+          </ol>
+        </details>
+      )}
+      <div class="prose" set:html={post.html} />
+      <footer class="article-footer">
+        <p>感谢读到这里。</p>
+        <a href="/posts/">继续翻翻其他记录 →</a>
+      </footer>
+    </article>
+    {post.data.comments !== false && (
+      <section class="comments">
+        <h2>聊聊这篇文章</h2>
+        <p class="muted">评论由 GitHub Discussions / Giscus 提供。</p>
+        <Button type="button" id="load-comments">
+          加载评论
+        </Button>
+        <div id="comments-container"></div>
+      </section>
+    )}
+    <script>
+      document.getElementById('load-comments')?.addEventListener(
+        'click',
+        (event) => {
+          const script = document.createElement('script');
+          script.src = 'https://giscus.app/client.js';
+          for (const [key, value] of Object.entries({
+            repo: 'rickylsr/blog-mm',
+            'repo-id': 'MDEwOlJlcG9zaXRvcnk0MDIzMjM5Mjc=',
+            category: 'General',
+            'category-id': 'DIC_kwDOF_r5184B-6jJ',
+            mapping: 'pathname',
+            strict: '0',
+            'reactions-enabled': '1',
+            'emit-metadata': '0',
+            'input-position': 'top',
+            theme: 'light',
+            lang: 'zh-CN',
+          }))
+            script.setAttribute(`data-${key}`, value);
+          script.crossOrigin = 'anonymous';
+          script.async = true;
+          document.getElementById('comments-container')?.append(script);
+          (event.currentTarget as HTMLButtonElement).hidden = true;
+        },
+        { once: true },
+      );
+    </script>
+  </Base>
+) : (
+  <Base
+    title={document.data.title}
+    description={document.data.excerpt}
+    noindex={document.data.sitemap === false}
+  >
+    <header class="page-heading">
+      <span class="eyebrow">A LITTLE ABOUT THIS SPACE</span>
+      <h1>{document.data.title}</h1>
+    </header>
+    <div class="prose" set:html={document.html} />
+  </Base>
+)}

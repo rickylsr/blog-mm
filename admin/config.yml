@@ -1,0 +1,80 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+backend:
+  name: github
+  repo: rickylsr/blog-mm
+  branch: master
+  base_url: https://ricky-blog-auth.rklee.workers.dev
+  auth_scope: public_repo
+
+site_url: https://rlee.cc
+display_url: https://rlee.cc
+
+# Saving creates a draft branch; publishing merges it into master.
+# Drafts in a public repository are still publicly accessible through GitHub.
+publish_mode:
+  type: editorial_workflow
+  stages: [draft]
+  direct_publish: true
+
+media_folder: assets/images/uploads
+public_folder: /assets/images/uploads
+media_libraries:
+  default:
+    config:
+      slugify_filename: true
+      transformations:
+        raster_image:
+          format: webp
+          quality: 85
+          width: 2048
+          height: 2048
+
+collections:
+  - name: posts
+    label: 文章
+    label_singular: 文章
+    folder: _posts
+    create: true
+    extension: md
+    format: yaml-frontmatter
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    summary: '{{title}} · {{date}}'
+    fields:
+      - { name: title, label: 标题, widget: string }
+      - name: date
+        label: 日期
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+        format: YYYY-MM-DD
+      - { name: excerpt, label: 摘要, widget: text, required: false }
+      - { name: tags, label: 标签, widget: list, required: false }
+      - { name: categories, label: 分类, widget: list, required: false }
+      - name: permalink
+        label: 固定链接
+        widget: string
+        required: false
+        hint: 已发布文章请保留原地址。新文章可留空，自动生成包含日期的地址。
+      - name: header
+        label: 封面
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { name: image, label: 文章头图, widget: image, required: false }
+          - { name: teaser, label: 列表缩略图, widget: image, required: false }
+      - {
+          name: toc,
+          label: 显示目录,
+          widget: boolean,
+          required: false,
+          default: false,
+        }
+      - {
+          name: toc_sticky,
+          label: 固定目录,
+          widget: boolean,
+          required: false,
+          default: false,
+        }
+      - { name: body, label: 正文, widget: markdown }

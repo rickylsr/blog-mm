@@ -1,0 +1,34 @@
+---
+import { formatDate, tagLink } from '../lib/content.mjs';
+const { posts } = Astro.props;
+---
+
+<div class="post-list">
+  {posts.map((post) => (
+    <article class="post-card">
+      <div class="post-meta">
+        <time datetime={post.date}>{formatDate(post.date)}</time>
+        <span class="meta-dot">·</span>
+        <span>{post.minutes} 分钟阅读</span>
+      </div>
+      <h2>
+        <a href={post.path}>{post.title}</a>
+      </h2>
+      <p>{post.excerpt}</p>
+      <div class="post-bottom">
+        <div class="post-tags">
+          {post.tags.map((tag) => (
+            <a href={tagLink(tag)}># {tag}</a>
+          ))}
+        </div>
+        <a
+          class="read-link"
+          href={post.path}
+          aria-label={`阅读全文：${post.title}`}
+        >
+          阅读全文 <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+  ))}
+</div>

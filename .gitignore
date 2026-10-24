@@ -2,3 +2,14 @@ _site
 .sass-cache
 .jekyll-metadata
 Gemfile.lock
+node_modules/
+.wrangler/
+.bundle/
+vendor/
+.env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+.astro/
+public/assets/

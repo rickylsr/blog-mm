@@ -1,0 +1,15 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "ricky-blog-auth",
+  "main": "index.js",
+  "compatibility_date": "2026-10-24",
+  "keep_vars": true,
+  "vars": {
+    "ALLOWED_DOMAINS": "ricky-blog.rklee.workers.dev,rlee.cc",
+  },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 0.1,
+    "traces": { "enabled": true, "head_sampling_rate": 0.1 },
+  },
+}

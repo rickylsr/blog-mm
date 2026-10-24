@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import { posts } from '../lib/content.mjs';
+const pageSize = 5;
+---
+
+<Base>
+  <section class="intro">
+    <div class="intro-top">
+      <span class="eyebrow">LIFE, TRAVEL & LITTLE THINGS</span>
+      <span class="intro-number">01 / JOURNAL</span>
+    </div>
+    <h1>
+      生活很琐碎，
+      <br />
+      也总有值得记录的事<span class="accent">。</span>
+    </h1>
+    <p>
+      旅行、做饭、技术折腾，和偶尔冒出来的想法。
+      <br class="desktop-break" />
+      这里是我的个人博客，也是一本慢慢写下去的笔记。
+    </p>
+    <div class="topic-links">
+      <a href="/tags/#游记">途中见闻 ↗</a>
+      <a href="/tags/#美食">厨房日常 ↗</a>
+      <a href="/posts/">所有记录 ↗</a>
+    </div>
+  </section>
+  <div class="section-heading">
+    <h2>最近更新</h2>
+    <span>{posts.length} 篇文章</span>
+  </div>
+  <PostList posts={posts.slice(0, pageSize)} />
+  {posts.length > pageSize && (
+    <nav class="pagination" aria-label="文章分页">
+      <span>第 1 / {Math.ceil(posts.length / pageSize)} 页</span>
+      <a href="/page2/">更早的文章 →</a>
+    </nav>
+  )}
+</Base>

@@ -38,7 +38,20 @@ include:
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
-# exclude:
+# Keep the previous GitHub Pages build usable until the domain cutover.
+exclude:
+  - admin
+  - cloudflare
+  - docs
+  - node_modules
+  - public
+  - scripts
+  - src
+  - tests
+  - astro.config.mjs
+  - package.json
+  - package-lock.json
+  - wrangler.jsonc
 #   - Gemfile
 #   - Gemfile.lock
 #   - node_modules

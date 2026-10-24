@@ -1,0 +1,39 @@
+{
+  "name": "ricky-blog",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "node scripts/prepare-assets.mjs && astro dev --host 127.0.0.1",
+    "dev:cms": "vite --config admin/vite.config.js --host 127.0.0.1",
+    "build:cms": "vite build --config admin/vite.config.js",
+    "build": "node scripts/prepare-assets.mjs && astro build && npm run build:cms && node scripts/check-build.mjs",
+    "check:cms": "node scripts/check-cms.mjs",
+    "deploy": "wrangler deploy",
+    "deploy:auth": "wrangler deploy --config cloudflare/auth/wrangler.jsonc",
+    "preview": "wrangler dev",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "@sveltia/cms": "0.251.0",
+    "astro": "7.4.2",
+    "markdown-it": "15.0.3",
+    "markdown-it-anchor": "10.0.0",
+    "markdown-it-footnote": "4.0.0",
+    "yaml": "^2.8.0"
+  },
+  "devDependencies": {
+    "@cfworker/json-schema": "^4.1.1",
+    "@tailwindcss/vite": "4.3.3",
+    "prettier": "3.9.10",
+    "prettier-plugin-astro": "1.1.2",
+    "tailwindcss": "4.3.3",
+    "vite": "8.3.5",
+    "wrangler": "4.152.0"
+  },
+  "overrides": {
+    "undici": "^7.30.1"
+  }
+}
