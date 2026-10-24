@@ -17,6 +17,7 @@
     "test": "node --test tests/*.test.mjs"
   },
   "dependencies": {
+    "@lucide/astro": "1.61.0",
     "@sveltia/cms": "0.251.0",
     "astro": "7.4.2",
     "markdown-it": "15.0.3",

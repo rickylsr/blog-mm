@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 import { formatDate, tagLink } from '../lib/content.mjs';
 const { posts } = Astro.props;
 ---
@@ -26,7 +27,7 @@ const { posts } = Astro.props;
           href={post.path}
           aria-label={`阅读全文：${post.title}`}
         >
-          阅读全文 <span aria-hidden="true">↗</span>
+          阅读全文 <Icon name="arrow-up-right" />
         </a>
       </div>
     </article>

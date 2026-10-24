@@ -198,6 +198,7 @@ main {
   font-size: 13px;
 }
 .author-links a {
+  gap: 6px;
   min-height: 36px;
   display: inline-flex;
   align-items: center;
@@ -1108,7 +1109,7 @@ html.search-open {
   min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding: 4px 20px 12px;
+  padding: 10px 20px 12px;
 }
 .search-dialog .search-form {
   margin-bottom: 12px;
@@ -1196,6 +1197,47 @@ html.search-open {
 @media print {
   .search-dialog,
   .search-dialog[open] {
+    display: none;
+  }
+}
+
+/* Keep Lucide glyphs consistent alongside text and in keyboard hints. */
+.ui-icon {
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: -0.15em;
+}
+.search-key-hints,
+.search-key-hint,
+.search-shortcut {
+  display: inline-flex;
+  align-items: center;
+}
+.search-key-hints {
+  gap: 14px;
+}
+.search-key-hint {
+  gap: 4px;
+}
+.search-key-hint > span {
+  margin-left: 3px;
+}
+.search-key-hint kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 24px;
+  padding: 0;
+}
+.search-shortcut {
+  gap: 3px;
+}
+.search-shortcut [hidden] {
+  display: none;
+}
+@media (max-width: 720px) {
+  .search-shortcut {
     display: none;
   }
 }

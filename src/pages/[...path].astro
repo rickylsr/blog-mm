@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
 import Button from '../components/Button.astro';
@@ -58,12 +59,16 @@ const coverDimensions = await imageDimensions(post?.data.header?.image);
     </header>
     <PostList posts={posts.slice((page - 1) * 5, page * 5)} />
     <nav class="pagination" aria-label="文章分页">
-      <a href={page === 2 ? '/' : `/page${page - 1}/`}>← 较新的文章</a>
+      <a href={page === 2 ? '/' : `/page${page - 1}/`}>
+        <Icon name="arrow-left" /> 较新的文章
+      </a>
       <span>
         {page} / {pageCount}
       </span>
       {page < pageCount ? (
-        <a href={`/page${page + 1}/`}>更早的文章 →</a>
+        <a href={`/page${page + 1}/`}>
+          更早的文章 <Icon name="arrow-right" />
+        </a>
       ) : (
         <span />
       )}
@@ -79,7 +84,7 @@ const coverDimensions = await imageDimensions(post?.data.header?.image);
     <article class="article">
       <header class="article-heading">
         <a class="back-link" href="/posts/">
-          ← 所有文章
+          <Icon name="arrow-left" /> 所有文章
         </a>
         <div class="post-meta">
           <time datetime={post.date}>{formatDate(post.date)}</time>
@@ -119,7 +124,9 @@ const coverDimensions = await imageDimensions(post?.data.header?.image);
       <div class="prose" set:html={articleHTML} />
       <footer class="article-footer">
         <p>感谢读到这里。</p>
-        <a href="/posts/">继续翻翻其他记录 →</a>
+        <a href="/posts/">
+          继续翻翻其他记录 <Icon name="arrow-right" />
+        </a>
       </footer>
     </article>
     {post.data.comments !== false && (

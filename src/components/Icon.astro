@@ -1,0 +1,41 @@
+---
+import {
+  ArrowDown,
+  ArrowLeft,
+  ArrowRight,
+  ArrowUp,
+  ArrowUpRight,
+  Command,
+  CornerDownLeft,
+  Rss,
+  Search,
+  X,
+} from '@lucide/astro';
+
+const icons = {
+  'arrow-down': ArrowDown,
+  'arrow-left': ArrowLeft,
+  'arrow-right': ArrowRight,
+  'arrow-up': ArrowUp,
+  'arrow-up-right': ArrowUpRight,
+  command: Command,
+  enter: CornerDownLeft,
+  rss: Rss,
+  search: Search,
+  close: X,
+};
+interface Props {
+  name: keyof typeof icons;
+  size?: number;
+}
+const { name, size = 16 } = Astro.props;
+const Glyph = icons[name];
+---
+
+<Glyph
+  class="ui-icon"
+  size={size}
+  stroke-width={1.75}
+  aria-hidden="true"
+  focusable="false"
+/>

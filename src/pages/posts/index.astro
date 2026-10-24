@@ -1,4 +1,5 @@
 ---
+import Icon from '../../components/Icon.astro';
 import Base from '../../layouts/Base.astro';
 import { posts, formatDate } from '../../lib/content.mjs';
 const years = [...new Set(posts.map((post) => post.date.slice(0, 4)))];
@@ -25,7 +26,7 @@ const years = [...new Set(posts.map((post) => post.date.slice(0, 4)))];
             <li>
               <time datetime={post.date}>{formatDate(post.date).slice(5)}</time>
               <a href={post.path}>{post.title}</a>
-              <span aria-hidden="true">↗</span>
+              <Icon name="arrow-up-right" />
             </li>
           ))}
       </ul>

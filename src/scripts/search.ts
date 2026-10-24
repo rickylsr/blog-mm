@@ -45,6 +45,11 @@ dialog.addEventListener('click', (event) => {
   if (event.target === dialog && backdropPress) dialog.close();
 });
 dialog.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && !event.isComposing) {
+    event.preventDefault();
+    dialog.close();
+    return;
+  }
   if (event.key !== 'Tab') return;
   const controls = [
     ...dialog.querySelectorAll<HTMLElement>(
@@ -81,10 +86,11 @@ document.addEventListener('keydown', (event) => {
     if (!event.repeat) openSearch();
   }
 });
-const shortcut = document.querySelector('[data-search-shortcut]')!;
-shortcut.textContent = /Mac|iPhone|iPad/.test(navigator.platform)
-  ? '⌘ K'
-  : 'Ctrl K';
+const macKeyboard = /Mac|iPhone|iPad/.test(navigator.platform);
+(document.querySelector('[data-search-modifier]') as HTMLElement).hidden =
+  macKeyboard;
+(document.querySelector('[data-search-command]') as HTMLElement).hidden =
+  !macKeyboard;
 
 for (const panel of document.querySelectorAll<HTMLElement>(
   '[data-search-panel]',

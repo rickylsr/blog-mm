@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 import '../styles/global.css';
 import { site, posts } from '../lib/content.mjs';
 import SearchDialog from '../components/SearchDialog.astro';
@@ -76,21 +77,14 @@ const nav = [
           aria-keyshortcuts="Control+k Meta+k"
           data-search-open
         >
-          <svg
-            viewBox="0 0 24 24"
-            width="19"
-            height="19"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.7"
-            aria-hidden="true"
-          >
-            <circle cx="10.5" cy="10.5" r="6.5" />
-            <path d="m16 16 4.5 4.5" />
-          </svg>
+          <Icon name="search" size={19} />
           <span>搜索</span>
           <kbd class="search-shortcut" data-search-shortcut aria-hidden="true">
-            Ctrl K
+            <span data-search-modifier>Ctrl</span>
+            <span data-search-command hidden>
+              <Icon name="command" size={12} />
+            </span>
+            <span>K</span>
           </kbd>
         </button>
       </nav>
@@ -116,12 +110,17 @@ const nav = [
         </div>
         <div class="author-links">
           <a href="https://github.com/rickylsr" rel="me">
-            GitHub ↗
+            GitHub <Icon name="arrow-up-right" />
           </a>
-          <a href="/feed.xml">RSS ↗</a>
+          <a href="/feed.xml">
+            <Icon name="rss" /> RSS
+          </a>
         </div>
         <p class="author-count">
-          {posts.length} 篇文章 · <a href="/posts/">浏览归档 →</a>
+          {posts.length} 篇文章 ·{' '}
+          <a href="/posts/">
+            浏览归档 <Icon name="arrow-right" />
+          </a>
         </p>
       </aside>
       <main id="main" tabindex="-1">
@@ -133,7 +132,9 @@ const nav = [
       <span>© {new Date().getFullYear()} Ricky Lee</span>
       <span>
         快乐生活，快乐科技。<span class="footer-dot"> · </span>
-        <a href="/feed.xml">订阅更新 ↗</a>
+        <a href="/feed.xml">
+          订阅更新 <Icon name="arrow-up-right" />
+        </a>
       </span>
     </footer>
   </body>

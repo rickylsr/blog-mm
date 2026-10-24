@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
 import { posts } from '../lib/content.mjs';
@@ -13,13 +14,17 @@ const pageSize = 5;
   </header>
   <div class="section-heading">
     <h2>最新文章</h2>
-    <a href="/posts/">全部 {posts.length} 篇 →</a>
+    <a href="/posts/">
+      全部 {posts.length} 篇 <Icon name="arrow-right" />
+    </a>
   </div>
   <PostList posts={posts.slice(0, pageSize)} />
   {posts.length > pageSize && (
     <nav class="pagination" aria-label="文章分页">
       <span>第 1 / {Math.ceil(posts.length / pageSize)} 页</span>
-      <a href="/page2/">更早的文章 →</a>
+      <a href="/page2/">
+        更早的文章 <Icon name="arrow-right" />
+      </a>
     </nav>
   )}
 </Base>
