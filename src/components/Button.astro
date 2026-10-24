@@ -1,0 +1,13 @@
+---
+const { class: className, ...props } = Astro.props;
+---
+
+<button
+  class:list={[
+    'inline-flex min-h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-md border border-primary bg-primary px-4 py-2 text-xs font-medium text-primary-foreground hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary disabled:pointer-events-none disabled:opacity-50',
+    className,
+  ]}
+  {...props}
+>
+  <slot />
+</button>

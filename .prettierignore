@@ -1,0 +1,10 @@
+node_modules/
+_site/
+.astro/
+.wrangler/
+_posts/
+_pages/
+_data/
+assets/
+public/assets/
+package-lock.json

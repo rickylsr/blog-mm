@@ -1,0 +1,48 @@
+name: Build and deploy blog
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: blog-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run check:cms
+      - run: npm test
+      - run: npm run build
+        env:
+          VITE_CMS_AUTH_URL: ${{ vars.VITE_CMS_AUTH_URL }}
+      - name: Upload static site for inspection
+        uses: actions/upload-artifact@v4
+        with:
+          name: static-blog
+          path: _site
+          retention-days: 7
+      - name: Deploy published branch to Cloudflare
+        if: github.event_name != 'pull_request'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -n "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            npm run deploy
+          else
+            echo 'Cloudflare deployment skipped: configure CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID.' >> "$GITHUB_STEP_SUMMARY"
+          fi

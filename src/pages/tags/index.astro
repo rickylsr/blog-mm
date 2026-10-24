@@ -1,0 +1,38 @@
+---
+import Base from '../../layouts/Base.astro';
+import { posts, tagId } from '../../lib/content.mjs';
+const tags = [...new Set(posts.flatMap((post) => post.tags))].sort((a, b) =>
+  a.localeCompare(b, 'zh'),
+);
+---
+
+<Base title="标签">
+  <header class="page-heading">
+    <span class="eyebrow">FOLLOW YOUR CURIOSITY</span>
+    <h1>从一个话题开始</h1>
+    <p>旅行、生活、技术，偶尔也认真想一想。</p>
+  </header>
+  <nav class="tag-cloud" aria-label="文章标签">
+    {tags.map((tag) => (
+      <a href={`#${tagId(tag)}`}>
+        {tag}
+        <span>{posts.filter((post) => post.tags.includes(tag)).length}</span>
+      </a>
+    ))}
+  </nav>
+  {tags.map((tag) => (
+    <section class="topic-group" id={tagId(tag)}>
+      <h2># {tag}</h2>
+      <ul>
+        {posts
+          .filter((post) => post.tags.includes(tag))
+          .map((post) => (
+            <li>
+              <a href={post.path}>{post.title}</a>
+              <time datetime={post.date}>{post.date.slice(0, 4)}</time>
+            </li>
+          ))}
+      </ul>
+    </section>
+  ))}
+</Base>

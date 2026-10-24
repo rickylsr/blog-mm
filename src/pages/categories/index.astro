@@ -1,0 +1,35 @@
+---
+import Base from '../../layouts/Base.astro';
+import { posts, tagId } from '../../lib/content.mjs';
+const categories = [...new Set(posts.flatMap((post) => post.categories))];
+---
+
+<Base title="分类">
+  <header class="page-heading">
+    <span class="eyebrow">BY CATEGORY</span>
+    <h1>文章分类</h1>
+    <p>
+      也可以<a href="/tags/">按标签浏览所有文章 →</a>
+    </p>
+  </header>
+  {categories.length ? (
+    categories.map((category) => (
+      <section class="topic-group" id={tagId(category)}>
+        <h2>{category}</h2>
+        <ul>
+          {posts
+            .filter((post) => post.categories.includes(category))
+            .map((post) => (
+              <li>
+                <a href={post.path}>{post.title}</a>
+              </li>
+            ))}
+        </ul>
+      </section>
+    ))
+  ) : (
+    <p class="muted">
+      目前文章使用标签整理，<a href="/tags/">去标签页看看</a>。
+    </p>
+  )}
+</Base>
