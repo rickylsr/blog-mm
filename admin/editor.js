@@ -4,7 +4,7 @@ import source from './config.yml?raw';
 
 const config = parse(source);
 config.load_config_file = false;
-const authURL = import.meta.env.VITE_CMS_AUTH_URL;
+const authURL = import.meta.env.VITE_CMS_AUTH_URL || config.backend.base_url;
 
 if (authURL) {
   const url = new URL(authURL);

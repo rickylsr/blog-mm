@@ -3,6 +3,8 @@ backend:
   name: github
   repo: rickylsr/blog-mm
   branch: master
+  base_url: https://ricky-blog-auth.rklee.workers.dev
+  auth_scope: public_repo
 
 site_url: https://rlee.cc
 display_url: https://rlee.cc

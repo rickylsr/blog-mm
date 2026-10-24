@@ -43,22 +43,26 @@ npm run deploy
 
 ## GitHub 自动发布
 
-`.github/workflows/cloudflare.yml` 在 PR 上构建并上传产物，在 `master` 更新时构建及部署。
-仓库 Settings → Secrets and variables → Actions 需要配置：
+使用 Cloudflare Workers Builds 连接 `rickylsr/blog-mm`，生产分支设为 `master`：
 
-| 类型 | 名称 | 用途 |
-| --- | --- | --- |
-| Secret | `CLOUDFLARE_API_TOKEN` | 限定到目标账户、具有 Workers 部署权限的 token |
-| Variable | `CLOUDFLARE_ACCOUNT_ID` | 目标账户 ID |
-| Variable（可选） | `VITE_CMS_AUTH_URL` | 自己部署的 OAuth 认证 Worker 的 HTTPS URL |
+| 配置 | 值 |
+| --- | --- |
+| Worker | `ricky-blog` |
+| 根目录 | `/` |
+| 构建命令 | `npm run build` |
+| 部署命令 | `npx wrangler deploy` |
+| Node 版本 | `.nvmrc` 中的 `24` |
+| 构建变量（可选） | `VITE_CMS_AUTH_URL` 为自己部署的认证服务 URL |
 
-没有部署凭据时，工作流只构建及上传产物，并在摘要中注明跳过部署。
+Cloudflare 自动安装依赖。连接时仅授权此博客仓库，按控制台指引配置构建用的部署权限。
+`.github/workflows/cloudflare.yml` 只负责 PR 和 `master` 的检查及产物上传，不重复发布，
+也不需要在 GitHub 中保存 Cloudflare 部署 token。
 请不要把任何凭据放进文章、`admin/config.yml` 或 `VITE_` 变量。
-如果 Worker 已连接 Cloudflare 自己的 Git 构建，选择一个发布入口，避免重复部署。
 
 ## 编辑器登录
 
-未设置 `VITE_CMS_AUTH_URL` 时，界面仅显示 GitHub 访问令牌登录。
+认证服务默认地址配置在 `admin/config.yml`，界面支持 GitHub OAuth 及访问令牌登录。
+`VITE_CMS_AUTH_URL` 可以覆盖默认认证服务地址；它是公开 URL，不是秘密值。
 个人试用可创建仅作用于本仓库的 fine-grained token，按 Sveltia 官方文档授权
 Contents、Pull requests、Issues 的读写权限，Metadata 读取权限。草稿工作流通过 PR 和标签管理。
 权限以当前版本的官方要求为准：
@@ -67,12 +71,26 @@ Contents、Pull requests、Issues 的读写权限，Metadata 读取权限。草�
 更适合手机的方式是自行部署官方 OAuth Worker：
 <https://github.com/sveltia/sveltia-cms-auth>
 
-1. 将官方认证服务部署到自己的 Cloudflare 账户。
-2. 在 GitHub 创建自己的 OAuth App，回调为认证 Worker 的 `/callback`。
-3. 按上游说明配置 client ID、client secret，并将 `ALLOWED_DOMAINS` 限定为
-   实际承载编辑器的域名（首次试用还包括博客的 `workers.dev` 域名）。
-4. 本地复制 `.env.example` 为 `.env.local`，填入认证 Worker URL；CI 中设置同名
-   `VITE_CMS_AUTH_URL` 仓库变量，再重新构建。
+本仓库固定官方认证代码版本，来源及许可证见 `cloudflare/auth/UPSTREAM.md`。
+
+1. `npm run deploy:auth` 部署到自己的 Cloudflare 账户。
+2. 在 GitHub 创建自己的 OAuth App，回调为
+   `https://ricky-blog-auth.rklee.workers.dev/callback`。
+3. 配置 `GITHUB_CLIENT_ID` 和 `GITHUB_CLIENT_SECRET` 两个 Worker secret：
+
+   ```sh
+   npx wrangler secret put GITHUB_CLIENT_ID --config cloudflare/auth/wrangler.jsonc
+   npx wrangler secret put GITHUB_CLIENT_SECRET --config cloudflare/auth/wrangler.jsonc
+   ```
+
+4. `/health` 返回 `ready: true` 表示两个配置已存在；这不替代实际的登录验证。
+5. 如改用不同的认证 Worker，修改 `admin/config.yml` 的 `base_url`，或通过
+   本地 `.env.local` / Cloudflare Builds 中的 `VITE_CMS_AUTH_URL` 覆盖，再重新构建。
+
+域名白名单已限定为 `ricky-blog.rklee.workers.dev` 和 `rlee.cc`。公开博客使用
+`public_repo` OAuth scope，不申请修改 Actions 的 `workflow` 权限。如果以后改为私有仓库，
+需要调整 scope 并重新授权。OAuth 的 `public_repo` 授权覆盖账户可访问的公开仓库，
+不等同于 fine-grained token 仅限定一个仓库。
 
 配置 OAuth 后也保留 token 登录。GitHub 授权和编辑器是两个部署，Cloudflare 登录
 不能替代编辑器的 GitHub 授权。认证 Worker 的 secrets 必须设置在认证服务自己的项目中。
