@@ -14,6 +14,7 @@ for (const file of [
   'sitemap.xml',
   'feed.xml',
   'search-index.json',
+  'build.json',
 ]) {
   await access(`_site/${file}`);
 }
