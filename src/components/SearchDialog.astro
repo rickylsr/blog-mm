@@ -1,0 +1,35 @@
+---
+import SearchPanel from './SearchPanel.astro';
+---
+
+<dialog class="search-dialog" id="search-dialog" aria-labelledby="search-title">
+  <header class="search-dialog-header">
+    <h2 id="search-title">搜索文章</h2>
+    <button
+      type="button"
+      class="search-close"
+      data-search-close
+      aria-label="关闭搜索"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        width="20"
+        height="20"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.7"
+        aria-hidden="true"
+      >
+        <path d="m6 6 12 12M6 18 18 6" />
+      </svg>
+      <kbd aria-hidden="true">Esc</kbd>
+    </button>
+  </header>
+  <SearchPanel id="dialog-search" />
+  <footer class="search-dialog-footer">
+    <span>
+      <kbd>↑</kbd> <kbd>↓</kbd> 选择 · <kbd>Enter</kbd> 打开
+    </span>
+    <a href="/posts/">浏览归档 →</a>
+  </footer>
+</dialog>

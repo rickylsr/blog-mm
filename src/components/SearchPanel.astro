@@ -1,0 +1,38 @@
+---
+const { id = 'page-search' } = Astro.props;
+---
+
+<section data-search-panel>
+  <form class="search-form" role="search">
+    <label class="sr-only" for={`${id}-query`}>
+      搜索文章
+    </label>
+    <input
+      id={`${id}-query`}
+      name="q"
+      type="search"
+      placeholder="比如：日本、食谱、OpenWrt…"
+      autocomplete="off"
+      enterkeyhint="search"
+      aria-describedby={`${id}-status`}
+      data-search-input
+    />
+    <button class="button" type="submit">
+      搜索
+    </button>
+  </form>
+  <div class="search-feedback">
+    <p class="muted" id={`${id}-status`} role="status" data-search-status>
+      搜标题、标签，或文章里的某句话。
+    </p>
+    <button type="button" class="search-retry" data-search-retry hidden>
+      重新加载
+    </button>
+  </div>
+  <ul class="search-results" data-search-results aria-label="搜索结果"></ul>
+  <noscript>
+    搜索需要 JavaScript。你也可以<a href="/posts/">浏览全部文章</a>。
+  </noscript>
+</section>
+
+<script src="../scripts/search.ts"></script>
